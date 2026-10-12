@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    function isValidStory(data) {
+      return data.keys().hasAll(['id', 'userId', 'username', 'userAvatar', 'mediaUrl', 'createdAt', 'expiresAt', 'expiresAtTimestamp']) &&
+             data.keys().hasOnly(['id', 'userId', 'username', 'userAvatar', 'mediaUrl', 'mediaType', 'caption', 'createdAt', 'expiresAt', 'expiresAtTimestamp', 'filter']) &&
+             data.id is string && data.id.size() > 0 && data.id.size() <= 100 &&
+             data.userId is string && data.userId.size() > 0 && data.userId.size() <= 100 &&
+             data.username is string && data.username.size() > 0 && data.username.size() <= 100 &&
+             data.userAvatar is string && data.userAvatar.size() > 0 &&
+             data.mediaUrl is string && data.mediaUrl.size() > 0 &&
+             data.createdAt is string &&
+             data.expiresAt is string &&
+             data.expiresAtTimestamp is number;
+    }
+
+    match /stories/{storyId} {
+      allow read: if true;
+      allow create: if isValidStory(request.resource.data);
+      allow update: if isValidStory(request.resource.data);
+      allow delete: if true;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

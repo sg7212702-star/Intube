@@ -1,0 +1,73 @@
+{
+  "entities": {
+    "Story": {
+      "title": "Story",
+      "description": "A 24-hour temporary story uploaded from camera or gallery",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique story identifier"
+        },
+        "userId": {
+          "type": "string",
+          "description": "ID of the user who published the story"
+        },
+        "username": {
+          "type": "string",
+          "description": "Username of the author"
+        },
+        "userAvatar": {
+          "type": "string",
+          "description": "Profile picture URL of the author"
+        },
+        "mediaUrl": {
+          "type": "string",
+          "description": "Image or video media data URL"
+        },
+        "mediaType": {
+          "type": "string",
+          "description": "Type of media (image or video)"
+        },
+        "caption": {
+          "type": "string",
+          "description": "Caption overlay text on the story"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO 8601 string of story creation time"
+        },
+        "expiresAt": {
+          "type": "string",
+          "description": "ISO 8601 string of story expiry time (24 hours after creation)"
+        },
+        "expiresAtTimestamp": {
+          "type": "number",
+          "description": "Epoch millisecond timestamp when the story expires"
+        },
+        "filter": {
+          "type": "string",
+          "description": "Visual color filter applied to the story"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "username",
+        "userAvatar",
+        "mediaUrl",
+        "createdAt",
+        "expiresAt",
+        "expiresAtTimestamp"
+      ]
+    }
+  },
+  "firestore": {
+    "/stories/{storyId}": {
+      "schema": {
+        "$ref": "#/entities/Story"
+      },
+      "description": "Real-time temporary stories that expire after 24 hours"
+    }
+  }
+}

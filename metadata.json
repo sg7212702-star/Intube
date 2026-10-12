@@ -1,0 +1,8 @@
+{
+  "name": "InTube - Instagram Experience",
+  "description": "Full-featured Instagram social media web application with Feed, Stories viewer, Reels, Direct Messages, Explore grid, Upload creator, and Profile.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
